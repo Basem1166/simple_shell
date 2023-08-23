@@ -23,5 +23,5 @@ int print_env(void);
 int _strcmp(const char *s1, char *s2);
 int _strncmp(const char *str1, const char *str2, int n);
 char *_getenv(const char *name);
-
+char *_memcpy(char *dest, char *src, unsigned int n);
 #endif /* SHELL_H */
