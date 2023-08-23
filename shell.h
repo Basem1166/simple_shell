@@ -14,6 +14,8 @@
 
 #define MAX 1024
 
+extern char **environ;
+
 /* Function prototypes */
 char *_strcat(char *dest, char *src);
 int _strlen(const char *s);
