@@ -7,7 +7,7 @@
  *
  * Return: 0 if the strings are equal, -1 otherwise.
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, char *s2)
 {
 	int i;
 
@@ -29,7 +29,7 @@ int _strcmp(char *s1, char *s2)
  *
  * Return: The length of the string.
  */
-size_t _strlen(char *s)
+int _strlen(const char *s)
 {
 	size_t len = 0;
 
@@ -73,3 +73,26 @@ char *_memcpy(char *dest, char *src, unsigned int n)
 	return (start);
 }
 
+/**
+ * _strncmp - function that compares two string
+ * @str1: string
+ * @str2: string 2
+ * @n: bytes to be compared
+ * Return: 0 for true
+ */
+int _strncmp(const char *str1, const char *str2, int n)
+{
+	while (n > 0 && *str1 == *str2)
+	{
+		if (*str1 == '\0')
+			return (0);
+		str1++;
+		str2++;
+		n--;
+	}
+
+	if (n == 0)
+		return (0);
+	else
+		return (*str1 - *str2);
+}

@@ -68,6 +68,8 @@ int tokenize_line(char *line, char *argv[])
  */
 int execute_command(char *argv[])
 {
+	pid_t pid;
+
 	if (_strcmp(argv[0], "exit") == 0)
 		return (1);
 	if (_strcmp(argv[0], "env") == 0)
@@ -75,7 +77,7 @@ int execute_command(char *argv[])
 		print_env();
 		return (1);
 	}
-	pid_t pid = fork();
+	pid = fork();
 
 	if (pid == -1)
 	{
