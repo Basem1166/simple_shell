@@ -109,9 +109,11 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	int n;
 
 	if (_strcmp(line, "env\n") == 0)
+	{
 		n = print_env();
-	if (n == -1)
-		perror("environ");
+		if (n == -1)
+			perror("environ");
+	}
 	if (nread == 1)
 	{
 		free(line);
