@@ -18,7 +18,7 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-		write(1,"$ ", 2);
+		write(1, "#cisfun$ ", 9);
 		nread = getline(&line, &line_size, stdin);
 
 		if (checkbuiltins(check, line, nread) == 0)
