@@ -7,13 +7,13 @@
  */
 int main(void)
 {
-	char *command;
+	char *command = NULL;
 	char *line = NULL;
 	size_t line_size = 0;
 	ssize_t nread;
 	int check = errno;
 	char *argv[MAX];
-	char *nnread;
+	char *nnread = NULL;
 
 	while (1)
 	{

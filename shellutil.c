@@ -65,6 +65,7 @@ int nopath(char *command, char *argv[])
 		return (0);
 	}
 	argv[0] = command;
+	return (1);
 }
 
 /**
@@ -75,7 +76,7 @@ int nopath(char *command, char *argv[])
  *
  * Return: 0 on failure.
  */
-int tokenize(char nnread, char argv[], char *line)
+int tokenize(char *nnread, char *argv[], char *line)
 {
 	int i = 0;
 
@@ -92,6 +93,7 @@ int tokenize(char nnread, char argv[], char *line)
 
 	if (argv[0] == NULL)
 		return (0);
+	return (1);
 }
 
 /**
@@ -128,6 +130,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 		printf("\nEnd of input. Exiting shell.\n");
 		exit(EXIT_SUCCESS);
 	}
+	return (1);
 }
 /**
  * forking - Creates a child process and executes a program in it.
