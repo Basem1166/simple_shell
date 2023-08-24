@@ -155,6 +155,10 @@ void forking(char *argv[])
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
+	else
+	{
+		wait(NULL);
+	}
 	if (!isatty(STDIN_FILENO))
 		exit(0);
 }
