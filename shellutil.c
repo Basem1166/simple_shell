@@ -31,7 +31,7 @@ int nopath(char *command, char *argv[])
 {
 	char *path = _getenv("PATH");
 	char *path_copy = _strdup(path);
-	char *dir;
+	char *dir = NULL;
 	int ndir;
 
 	if (!path)
@@ -109,19 +109,21 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	int n;
 
 	if (_strcmp(line, "env\n") == 0)
+	{
 		n = print_env();
-
-	if (n == -1)
-		perror("environ");
-
+		if (n == -1)
+			perror("environ");
+	}
 	if (nread == 1)
 	{
+		free(line);
 		return (0);
 	}
 
 	if (nread == -1 && check != errno)
 	{
 		perror("getline");
+		free(line);
 		exit(0);
 	}
 	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0))
@@ -129,6 +131,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 		free(line);
 		exit(EXIT_SUCCESS);
 	}
+	free(line);
 	return (1);
 }
 /**
