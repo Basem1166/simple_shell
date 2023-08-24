@@ -120,6 +120,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	if (nread == -1 && check != errno)
 	{
 		perror("getline");
+		free(line);
 		exit(0);
 	}
 	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0))
