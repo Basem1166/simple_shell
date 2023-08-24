@@ -75,7 +75,7 @@ int nopath(char *command, char *argv[])
  *
  * Return: 0 on failure.
  */
-int tokenize(char nnread, char argv[], char *line)
+int tokenize(char *nnread, char *argv[], char *line)
 {
 	int i = 0;
 

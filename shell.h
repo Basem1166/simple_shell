@@ -22,7 +22,7 @@ int _strcmp(const char *s1, char *s2);
 int _strncmp(const char *str1, const char *str2, int n);
 char *_getenv(const char *name);
 int nopath(char *command, char *argv[]);
-int tokenize(char nnread, char argv[], char *line);
+int tokenize(char *nnread, char *argv[], char *line);
 int checkbuiltins(int check, char *line, ssize_t nread);
 char *_strdup(char *str);
 char *_memcpy(char *dest, char *src, unsigned int n);
