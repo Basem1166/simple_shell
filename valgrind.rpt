@@ -1,0 +1,32 @@
+==345== Memcheck, a memory error detector
+==345== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==345== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==345== Command: ./hsh
+==345== Parent PID: 18
+==345== 
+==345== Conditional jump or move depends on uninitialised value(s)
+==345==    at 0x109775: checkbuiltins (in /alx-low_level_programming/simple_shell/hsh)
+==345==    by 0x1093AF: main (in /alx-low_level_programming/simple_shell/hsh)
+==345== 
+==345== 
+==345== HEAP SUMMARY:
+==345==     in use at exit: 48 bytes in 4 blocks
+==345==   total heap usage: 23 allocs, 19 frees, 2,660 bytes allocated
+==345== 
+==345== 36 bytes in 3 blocks are definitely lost in loss record 2 of 2
+==345==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==345==    by 0x10959E: nopath (in /alx-low_level_programming/simple_shell/hsh)
+==345==    by 0x109408: main (in /alx-low_level_programming/simple_shell/hsh)
+==345== 
+==345== LEAK SUMMARY:
+==345==    definitely lost: 36 bytes in 3 blocks
+==345==    indirectly lost: 0 bytes in 0 blocks
+==345==      possibly lost: 0 bytes in 0 blocks
+==345==    still reachable: 12 bytes in 1 blocks
+==345==         suppressed: 0 bytes in 0 blocks
+==345== Reachable blocks (those to which a pointer was found) are not shown.
+==345== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==345== 
+==345== Use --track-origins=yes to see where uninitialised values come from
+==345== For lists of detected and suppressed errors, rerun with: -s
+==345== ERROR SUMMARY: 13 errors from 2 contexts (suppressed: 0 from 0)
