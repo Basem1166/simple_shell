@@ -129,4 +129,35 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 		exit(EXIT_SUCCESS);
 	}
 }
+/**
+ * forking - Creates a child process and executes a program in it.
+ * @argv: An array of strings containing the program path and arguments.
+ *
+ * Return: This function does not return any value.
+ */
+void forking(char *argv[])
+{
+	pid_t pid;
 
+	pid = fork();
+
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(1);
+	}
+
+	if (pid == 0)
+	{
+		execve(argv[0], argv, environ);
+		perror("execve");
+		exit(1);
+	}
+	else
+	{
+		wait(NULL);
+	}
+
+	if (!isatty(STDIN_FILENO))
+		exit(1);
+}
