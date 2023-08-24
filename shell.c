@@ -17,7 +17,7 @@ int main(void)
 
 	while (1)
 	{
-		if (!isatty(STDIN_FILENO))
+		if (isatty(STDIN_FILENO))
 		write(1,"$ ", 2);
 		nread = getline(&line, &line_size, stdin);
 
