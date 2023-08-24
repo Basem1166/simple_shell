@@ -1,4 +1,4 @@
-#include "shell"
+#include "shell.h"
 
 
 /**
@@ -14,7 +14,7 @@ int main(void)
 	ssize_t nread;
 	int check = errno;
 	char *argv[MAX];
-	char *nnread = NULL:
+	char *nnread = NULL;
 
 	while (1)
 	{
