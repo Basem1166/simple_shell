@@ -122,12 +122,11 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	if (nread == -1 && check != errno)
 	{
 		perror("getline");
-		exit(1);
+		exit(0);
 	}
 	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0))
 	{
 		free(line);
-		printf("\nEnd of input. Exiting shell.\n");
 		exit(EXIT_SUCCESS);
 	}
 	return (1);
@@ -147,14 +146,14 @@ void forking(char *argv[])
 	if (pid == -1)
 	{
 		perror("fork");
-		exit(1);
+		exit(0);
 	}
 
 	if (pid == 0)
 	{
 		execve(argv[0], argv, environ);
 		perror("execve");
-		exit(1);
+		exit(0);
 	}
 	else
 	{
@@ -162,5 +161,5 @@ void forking(char *argv[])
 	}
 
 	if (!isatty(STDIN_FILENO))
-		exit(1);
+		exit(0);
 }
