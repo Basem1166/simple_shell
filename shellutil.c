@@ -114,6 +114,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 		perror("environ");
 	if (nread == 1)
 	{
+		free(line);
 		return (0);
 	}
 
