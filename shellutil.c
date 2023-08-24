@@ -159,6 +159,4 @@ void forking(char *argv[])
 	{
 		wait(NULL);
 	}
-	if (!isatty(STDIN_FILENO))
-		exit(0);
 }

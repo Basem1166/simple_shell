@@ -38,8 +38,8 @@ int main(void)
 			perror(argv[0]);
 			continue;
 		}
-	}
 
+	}
 	free(line);
 	return (0);
 }
