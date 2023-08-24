@@ -28,8 +28,14 @@ int main(void)
 		if (access(argv[0], X_OK) != 0)
 			if (nopath(command, argv) == 0)
 				continue;
-
-		forking(argv);
+		if (access(argv[0], X_OK) == 0)
+			forking(argv);
+		else
+		{
+			free(line);
+			perror(argv[0]);
+			continue;
+		}
 	}
 
 	free(line);

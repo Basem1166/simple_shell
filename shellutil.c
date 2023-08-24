@@ -124,7 +124,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	{
 		perror("getline");
 		free(line);
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0))
 	{
@@ -136,8 +136,6 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 /**
  * forking - Creates a child process and executes a program in it.
  * @argv: An array of strings containing the program path and arguments.
- *
- * Return: This function does not return any value.
  */
 void forking(char *argv[])
 {
@@ -148,14 +146,14 @@ void forking(char *argv[])
 	if (pid == -1)
 	{
 		perror("fork");
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 
 	if (pid == 0)
 	{
 		execve(argv[0], argv, environ);
 		perror("execve");
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
