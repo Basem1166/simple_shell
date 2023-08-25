@@ -28,6 +28,7 @@ int tokenize(char *nnread, char *argv[], char *line);
 int checkbuiltins(int check, char *line, ssize_t nread);
 char *_strdup(char *str);
 char *_memcpy(char *dest, char *src, unsigned int n);
-void forking(char *argv[], int mode);
+void forking(char *argv[], int mode, char *line);
+char *_strcpy(char *dest, char *src);
 
 #endif /* SHELL_H */

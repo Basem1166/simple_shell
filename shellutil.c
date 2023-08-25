@@ -45,7 +45,7 @@ int nopath(char *command, char *argv[])
 		ndir = _strlen(dir) + _strlen(argv[0]) + 2;
 		command = malloc(sizeof(char) * ndir);
 		command[0] = '\0';
-		_strcat(command, dir);
+		_strcpy(command, dir);
 		_strcat(command, "/");
 		_strcat(command, argv[0]);
 		if (access(command, X_OK) == 0)
@@ -65,8 +65,6 @@ int nopath(char *command, char *argv[])
 		return (0);
 	}
 	argv[0] = command;
-	if (command != NULL)
-		free(command);
 	return (1);
 }
 
@@ -139,8 +137,9 @@ int checkbuiltins(int check, char *line, ssize_t nread)
  * forking - Creates a child process and executes a program in it.
  * @argv: An array of strings containing the program path and arguments.
  * @mode: 1 for interactive and 2 for non interactive
+ * @line: line from user
  */
-void forking(char *argv[], int mode)
+void forking(char *argv[], int mode, char *line)
 {
 	char *newargv[2];
 	pid_t pid;
@@ -149,6 +148,7 @@ void forking(char *argv[], int mode)
 
 	if (pid == -1)
 	{
+		free(line);
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}
@@ -156,11 +156,15 @@ void forking(char *argv[], int mode)
 	if (pid == 0)
 	{
 		if (mode == 1)
+		{
+			free(line);
 			execve(argv[0], argv, environ);
+		}
 		else
 		{
 			newargv[0] = argv[0];
 			newargv[1] = NULL;
+			free(line);
 			execve(argv[0], newargv, environ);
 		}
 		perror("execve");

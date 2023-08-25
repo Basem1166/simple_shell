@@ -29,14 +29,16 @@ int interactive(char *line)
 			return (0);
 
 	if (access(argv[0], X_OK) == 0)
-		forking(argv, 1);
+	{
+		forking(argv, 1, line);
+	}
 	else
 	{
-		free(line);
 		perror(argv[0]);
 		return (0);
 	}
 	return (1);
+	free(argv[0]);
 }
 
 /**
@@ -73,7 +75,9 @@ void non_interactive(char *line)
 			}
 
 		if (access(argv[i], X_OK) == 0)
-			forking(&argv[i], 2);
+		{
+			forking(&argv[i], 2, line);
+		}
 		else
 		{
 			free(line);
