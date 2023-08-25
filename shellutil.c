@@ -157,14 +157,12 @@ void forking(char *argv[], int mode, char *line)
 	{
 		if (mode == 1)
 		{
-			free(line);
 			execve(argv[0], argv, environ);
 		}
 		else
 		{
 			newargv[0] = argv[0];
 			newargv[1] = NULL;
-			free(line);
 			execve(argv[0], newargv, environ);
 		}
 		perror("execve");
