@@ -381,7 +381,7 @@ int interactive(char *line)
 	ssize_t nread;
 	size_t line_size = 0;
 	char *command = NULL;
-	int check = errno;
+	int check = errno, flag = 0;
 	char *argv[MAX];
 	char *nnread = NULL;
 
@@ -396,9 +396,11 @@ int interactive(char *line)
 		return (0);
 
 	if (access(argv[0], X_OK) != 0)
+	{
+	    flag = 1;
 		if (nopath(command, argv) == 0)
 			return (0);
-
+    }
 	if (access(argv[0], X_OK) == 0)
 	{
 		forking(argv, 1, line);
@@ -410,7 +412,7 @@ int interactive(char *line)
 	}
 	if (line)
 		free(line);
-	if (argv[0])
+	if (argv[0] && flag == 1)
 		free(argv[0]);
 	return (1);
 }
