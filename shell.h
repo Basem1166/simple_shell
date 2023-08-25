@@ -15,6 +15,8 @@
 #define MAX 1024
 extern char **environ;
 
+int interactive(char *line);
+void non_interactive(char *line);
 char *_strcat(char *dest, char *src);
 int _strlen(const char *s);
 int print_env(void);
@@ -26,6 +28,6 @@ int tokenize(char *nnread, char *argv[], char *line);
 int checkbuiltins(int check, char *line, ssize_t nread);
 char *_strdup(char *str);
 char *_memcpy(char *dest, char *src, unsigned int n);
-void forking(char *argv[]);
+void forking(char *argv[], int mode);
 
 #endif /* SHELL_H */

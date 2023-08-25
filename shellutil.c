@@ -65,6 +65,8 @@ int nopath(char *command, char *argv[])
 		return (0);
 	}
 	argv[0] = command;
+	if (command != NULL)
+		free(command);
 	return (1);
 }
 
@@ -108,7 +110,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 {
 	int n;
 
-	if (_strcmp(line, "env\n") == 0)
+	if (_strcmp(line, "env\n") == 0 || _strcmp(line, "env") == 0)
 	{
 		n = print_env();
 		if (n == -1)
@@ -126,9 +128,9 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 		free(line);
 		exit(EXIT_FAILURE);
 	}
-	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0))
+	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0) ||
+			(_strcmp(line, "exit") == 0))
 	{
-		free(line);
 		exit(EXIT_SUCCESS);
 	}
 	return (1);
@@ -136,9 +138,11 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 /**
  * forking - Creates a child process and executes a program in it.
  * @argv: An array of strings containing the program path and arguments.
+ * @mode: 1 for interactive and 2 for non interactive
  */
-void forking(char *argv[])
+void forking(char *argv[], int mode)
 {
+	char *newargv[2];
 	pid_t pid;
 
 	pid = fork();
@@ -151,7 +155,14 @@ void forking(char *argv[])
 
 	if (pid == 0)
 	{
-		execve(argv[0], argv, environ);
+		if (mode == 1)
+			execve(argv[0], argv, environ);
+		else
+		{
+			newargv[0] = argv[0];
+			newargv[1] = NULL;
+			execve(argv[0], newargv, environ);
+		}
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
