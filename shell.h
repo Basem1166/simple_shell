@@ -30,5 +30,8 @@ char *_strdup(char *str);
 char *_memcpy(char *dest, char *src, unsigned int n);
 void forking(char *argv[], int mode, char *line);
 char *_strcpy(char *dest, char *src);
+void setline(char **lineptr, ssize_t position, size_t *n, char *buffer);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 #endif /* SHELL_H */
