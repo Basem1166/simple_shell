@@ -57,14 +57,14 @@ int nopath(char *command, char *argv[], int *status)
 	free(path_copy);
 	if (!command)
 	{
+		if (access(command, X_OK) == -2)
+		{
+			perror(argv[-1]);
+			free(command);
+			return (-1);
+		}
 		*status = 2;
-		perror("NOT FOUND");
-		return (0);
-	}
-	if (access(command, X_OK) == -1)
-	{
-		perror(argv[0]);
-		free(command);
+		perror("");
 		return (0);
 	}
 	argv[0] = command;
