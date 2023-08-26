@@ -14,13 +14,13 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			if (interactive(line) == 0)
-				continue;
+		if (interactive(line) == 0)
+			continue;
 		}
 		else
 		{
-			non_interactive(line);
-			break;
+			if (interactive(line) == 0)
+				continue;
 		}
 	}
 	if (line)

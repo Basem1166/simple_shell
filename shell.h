@@ -33,5 +33,7 @@ char *_strcpy(char *dest, char *src);
 void setline(char **lineptr, ssize_t position, size_t *n, char *buffer);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-
+char *ret_nondelim(char* str1, char* str2);
+char *ret_noofbytes(char* str1, char* str2);
+char *_strtok(char* str1, char* str2);
 #endif /* SHELL_H */
