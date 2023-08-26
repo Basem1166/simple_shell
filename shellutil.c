@@ -57,9 +57,9 @@ int nopath(char *command, char *argv[], int *status)
 	free(path_copy);
 	if (!command)
 	{
-		if (access(command, X_OK) == -2)
+		if (access(command, X_OK) == -1)
 		{
-			perror(argv[-1]);
+			perror("./hsh");
 			free(command);
 			return (-1);
 		}
