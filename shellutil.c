@@ -95,7 +95,10 @@ int tokenize(char *nnread, char *argv[], char *line)
 	argv[i] = NULL;
 
 	if (argv[0] == NULL)
+	{
+		free(line);
 		return (0);
+	}
 	return (1);
 }
 
