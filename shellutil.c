@@ -109,8 +109,17 @@ int tokenize(char *nnread, char *argv[], char *line)
 int checkbuiltins(int check, char *line, ssize_t nread)
 {
 	int n;
+			
+	if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0) ||
+			(_strcmp(line, "exit") == 0))
+	{
+		if (line)
+			free(line);
+		exit(EXIT_SUCCESS);
+	}
 
 	if (_strcmp(line, "env\n") == 0 || _strcmp(line, "env") == 0)
+
 	{
 		n = print_env();
 		if (n == -1)
@@ -127,13 +136,6 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 		perror("getline");
 		free(line);
 		exit(EXIT_FAILURE);
-	}
-	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0) ||
-			(_strcmp(line, "exit") == 0))
-	{
-		if (line)
-			free(line);
-		exit(EXIT_SUCCESS);
 	}
 	return (1);
 }
