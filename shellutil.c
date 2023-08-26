@@ -117,7 +117,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	if ((_strcmp(line, "exit\n") == 0) || (_strcmp(line, "exit") == 0))
 	{
 		free(line);
-		exit(2);
+		exit(errno);
 	}
 	if (_strcmp(line, "env\n") == 0 || _strcmp(line, "env") == 0)
 
