@@ -245,18 +245,20 @@ int nopath(char *command, char *argv[])
 		if (access(command, X_OK) == 0)
 			break;
 		free(command);
+		command = NULL;
 		dir = strtok(NULL, ":");
 	}
 	free(path_copy);
-	if (access(command, X_OK) == -1)
-	{
-		perror(argv[0]);
-		free(command);
-		return (0);
-	}
+
 	if (!command)
 	{
 		perror("NOT FOUND");
+		free(command);
+		return (0);
+	}
+	if (access(command, X_OK) == -1)
+	{
+		perror(argv[0]);
 		free(command);
 		return (0);
 	}
@@ -325,6 +327,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	else if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0) ||
 			(_strcmp(line, "exit") == 0))
 	{
+		if (line)
 		free(line);
 		exit(EXIT_SUCCESS);
 	}
@@ -398,8 +401,10 @@ int interactive(char *line)
 	if (access(argv[0], X_OK) != 0)
 	{
 	    flag = 1;
-		if (nopath(command, argv) == 0)
+		if (nopath(command, argv) == 0){
+			free(line);
 			return (0);
+		}
     }
 	if (access(argv[0], X_OK) == 0)
 	{
