@@ -99,6 +99,11 @@ int tokenize(char *nnread, char *argv[], char *line)
 		free(line);
 		return (0);
 	}
+	if (argv[0][0] == '#')
+	{
+		free(line);
+		exit(EXIT_SUCCESS);
+	}
 	return (1);
 }
 
