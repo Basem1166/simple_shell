@@ -110,14 +110,6 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 {
 	int n;
 			
-	if ((nread == -1 && check == errno) || (_strcmp(line, "exit\n") == 0) ||
-			(_strcmp(line, "exit") == 0))
-	{
-		if (line)
-			free(line);
-		exit(EXIT_SUCCESS);
-	}
-
 	if ((nread == -1 && check == errno))
 	{
 		exit(EXIT_SUCCESS);
@@ -125,7 +117,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	if ((_strcmp(line, "exit\n") == 0) || (_strcmp(line, "exit") == 0))
 	{
 		free(line);
-		exit(EXIT_SUCCESS);
+		exit(2);
 	}
 	if (_strcmp(line, "env\n") == 0 || _strcmp(line, "env") == 0)
 
