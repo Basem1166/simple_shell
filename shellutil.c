@@ -128,6 +128,7 @@ int checkbuiltins(int check, char *line, ssize_t nread, int last_exit)
 
 	{
 		n = print_env();
+		free(line);
 		exit(EXIT_SUCCESS);
 		if (n == -1)
 			perror("environ");
