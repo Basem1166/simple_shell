@@ -23,6 +23,7 @@ int main(void)
 			break;
 		}
 	}
-	free(line);
+	if (line)
+		free(line);
 	return (0);
 }
