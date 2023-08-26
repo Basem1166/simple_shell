@@ -8,18 +8,19 @@
  */
 int main(void)
 {
+	int status = 0;
 	char *line = NULL;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-		if (interactive(line) == 0)
+		if (interactive(line, &status) == 0)
 			continue;
 		}
 		else
 		{
-			if (interactive(line) == 0)
+			if (interactive(line, &status) == 0)
 				continue;
 		}
 	}

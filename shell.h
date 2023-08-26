@@ -15,7 +15,7 @@
 #define MAX 1024
 extern char **environ;
 
-int interactive(char *line);
+int interactive(char *line, int *n);
 void non_interactive(char *line);
 char *_strcat(char *dest, char *src);
 int _strlen(const char *s);
@@ -23,12 +23,12 @@ int print_env(void);
 int _strcmp(const char *s1, char *s2);
 int _strncmp(const char *str1, const char *str2, int n);
 char *_getenv(const char *name);
-int nopath(char *command, char *argv[]);
+int nopath(char *command, char *argv[], int *q);
 int tokenize(char *nnread, char *argv[], char *line);
-int checkbuiltins(int check, char *line, ssize_t nread);
+int checkbuiltins(int check, char *line, ssize_t nread, int n);
 char *_strdup(char *str);
 char *_memcpy(char *dest, char *src, unsigned int n);
-void forking(char *argv[], int mode, char *line);
+int forking(char *argv[], int mode, char *line);
 char *_strcpy(char *dest, char *src);
 void setline(char **lineptr, ssize_t position, size_t *n, char *buffer);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);

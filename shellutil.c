@@ -24,10 +24,10 @@ char *_getenv(const char *name)
  * nopath - Searches for an executable in directories specified by PATH.
  * @command: A pointer to store the resulting full path of the executable.
  * @argv: An array of strings containing command and arguments.
- *
+ * @status: status of exit
  * Return: 0 to continue
  */
-int nopath(char *command, char *argv[])
+int nopath(char *command, char *argv[], int *status)
 {
 	char *path = _getenv("PATH");
 	char *path_copy = _strdup(path);
@@ -57,6 +57,7 @@ int nopath(char *command, char *argv[])
 	free(path_copy);
 	if (!command)
 	{
+		*status = 2;
 		perror("NOT FOUND");
 		return (0);
 	}
@@ -103,13 +104,13 @@ int tokenize(char *nnread, char *argv[], char *line)
  * @check: An error code for checking errors.
  * @line: The input line from the user.
  * @nread: The number of characters read from the input line.
- *
+ * @last_exit: exit status from forking
  * Return: 0 to continue
  */
-int checkbuiltins(int check, char *line, ssize_t nread)
+int checkbuiltins(int check, char *line, ssize_t nread, int last_exit)
 {
 	int n;
-			
+
 	if ((nread == -1 && check == errno))
 	{
 		exit(EXIT_SUCCESS);
@@ -117,7 +118,7 @@ int checkbuiltins(int check, char *line, ssize_t nread)
 	if ((_strcmp(line, "exit\n") == 0) || (_strcmp(line, "exit") == 0))
 	{
 		free(line);
-		exit(errno);
+		exit(last_exit);
 	}
 	if (_strcmp(line, "env\n") == 0 || _strcmp(line, "env") == 0)
 
@@ -145,11 +146,13 @@ int checkbuiltins(int check, char *line, ssize_t nread)
  * @argv: An array of strings containing the program path and arguments.
  * @mode: 1 for interactive and 2 for non interactive
  * @line: line from user
+ * Return: status number
  */
-void forking(char *argv[], int mode, char *line)
+int forking(char *argv[], int mode, char *line)
 {
 	char *newargv[2];
 	pid_t pid;
+	int status = 0;
 
 	pid = fork();
 
@@ -177,6 +180,11 @@ void forking(char *argv[], int mode, char *line)
 	}
 	else
 	{
-		wait(NULL);
+		wait(&status);
+		if (WIFEXITED(status))
+		{
+			status = WEXITSTATUS(status);
+		}
 	}
+	return (status);
 }
