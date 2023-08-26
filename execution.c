@@ -64,7 +64,7 @@ void non_interactive(char *line)
 	char *nnread = NULL;
 	int i = 0;
 
-	nread = _getline(&line, &line_size, stdin);
+	nread = getline(&line, &line_size, stdin);
 	if (tokenize(nnread, argv, line) == 0)
 		return;
 
