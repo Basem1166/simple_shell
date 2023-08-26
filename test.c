@@ -253,7 +253,6 @@ int nopath(char *command, char *argv[])
 	if (!command)
 	{
 		perror("NOT FOUND");
-		free(command);
 		return (0);
 	}
 	if (access(command, X_OK) == -1)
