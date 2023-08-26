@@ -113,6 +113,7 @@ int checkbuiltins(int check, char *line, ssize_t nread, int last_exit)
 
 	if ((nread == -1 && check == errno))
 	{
+		free(line);
 		exit(EXIT_SUCCESS);
 	}
 	if ((_strcmp(line, "exit\n") == 0) || (_strcmp(line, "exit") == 0))
