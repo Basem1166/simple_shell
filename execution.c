@@ -16,7 +16,7 @@ int interactive(char *line)
 
 	if (isatty(STDIN_FILENO))
 		write(1, "$ ", 2);
-	nread = _getline(&line, &line_size, stdin);
+	nread = getline(&line, &line_size, stdin);
 
 	if (checkbuiltins(check, line, nread) == 0)
 		return (0);
